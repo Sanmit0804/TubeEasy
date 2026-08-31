@@ -1,0 +1,24 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyInstaller / Build artifacts
+build/
+*.spec.bak
+
+# Pytest
+.pytest_cache/
+
+# Local logs
+logs/
+*.log
+
+# Temp files
+*.zip
+ffmpeg_temp.zip
+
+# Large binary files (>100MB, handled via build.py auto-download & GitHub Releases)
+ffmpeg/ffmpeg.exe
+ffmpeg/ffprobe.exe
+dist/*.exe
