@@ -1,4 +1,4 @@
-﻿import os
+import os
 import sys
 import subprocess
 import shutil
@@ -16,6 +16,20 @@ BASE_DIR = Path(__file__).resolve().parent
 
 def log(msg: str):
     print(f"\n[BUILD] >>> {msg}")
+
+def clean_old_builds():
+    log("Cleaning legacy build artifacts...")
+    for old_path in [
+        BASE_DIR / "build" / "YouTubeDownloader",
+        BASE_DIR / "dist" / "YouTubeDownloader.exe",
+        BASE_DIR / "YouTubeDownloader.spec",
+    ]:
+        if old_path.exists():
+            if old_path.is_dir():
+                shutil.rmtree(old_path, ignore_errors=True)
+            else:
+                old_path.unlink(missing_ok=True)
+            print(f"  [CLEANED] Removed legacy {old_path.name}")
 
 def check_dependencies():
     log("Checking Python dependencies...")
@@ -73,7 +87,6 @@ def run_tests():
 def build_executable():
     log("Packaging standalone Windows executable with PyInstaller for TubeEasy...")
     dist_dir = BASE_DIR / "dist"
-    build_dir = BASE_DIR / "build"
     
     # Run PyInstaller with TubeEasy.spec
     cmd = [
@@ -126,6 +139,7 @@ def main():
     print("  TubeEasy -- Windows Standalone .exe Build System")
     print("=" * 65)
     
+    clean_old_builds()
     check_dependencies()
     check_ffmpeg()
     run_tests()
