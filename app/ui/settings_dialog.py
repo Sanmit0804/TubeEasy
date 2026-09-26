@@ -134,7 +134,7 @@ class SettingsDialog(QDialog):
         layout.setContentsMargins(14, 14, 14, 14)
         layout.setSpacing(10)
 
-        app_title = QLabel("YouTube Downloader", widget)
+        app_title = QLabel("TubeEasy", widget)
         app_title.setObjectName("TitleLabel")
         layout.addWidget(app_title)
 
